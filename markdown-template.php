@@ -82,6 +82,17 @@ function helper1(){
             $method_string .= "### `". $matches[0] ."`<br><br>";
             $method_string .= "--------- Description of the method ----------<br><br>";
             preg_match_all("/\\\$[^,]*(?<!\))(?<!,)/",$matches[0],$extracted_parameter_names,PREG_PATTERN_ORDER);
+
+            if (!empty($extracted_parameter_names[0])) {
+                $method_string .= "#### Parameters<br><br>";
+                $method_string .= "| Type  | Name | Description |<br>";
+                $method_string .= "| ----- | ----------------------- | -------------------------------------------- |<br>";
+                foreach ($extracted_parameter_names[0] as $parameter => $parameter_name) {
+                    $method_string .= "|  | `".$parameter_name."` | |<br>";
+                }
+                $method_string .= "<br>";
+            }
+
             $method_string .= "#### Return Value<br><br>";
             $method_string .= "--------- Return Value ----------<br><br>";
         }
