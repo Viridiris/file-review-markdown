@@ -6,4 +6,9 @@ function helper1(){
     echo "# " . $file_title . "<br><br>";
 
 
+    $table_string = "## Routes<br><br>";
+    $table_string .= "| Verb | Route  | Invoked Method  |<br>";
+    $table_string .= "| ---- | ------ | --------------- |<br>";
+
+
 }
