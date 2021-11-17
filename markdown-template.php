@@ -44,4 +44,28 @@ function helper1(){
     echo $constant_string;
     echo "<br>";
 
+    // -----------------------------------------------------------------------------------------
+    // INSERT PROPERTIES HERE -----------------------------------------------------------------------------------------
+    // -----------------------------------------------------------------------------------------
+    $property_string = "## Properties<br><br>";
+
+    $properties = "";
+
+    preg_match_all("/\\\$\S*(?<!;)/",$properties,$extracted_property_names,PREG_PATTERN_ORDER);
+
+    if (empty($extracted_property_names[0])) {
+        $property_string .= "None<br>";
+    } else {
+        foreach ($extracted_property_names[0] as $var_name) {
+            $property_string .= "| Type | Name | Description |<br>";
+            $property_string .= "| ---- | ---- | ----------- |<br>";
+            $property_string .= "|  | `". $var_name ."` |  |<br>";
+        }
+    }
+
+
+
+    echo $property_string;
+    echo "<br>";
+
 }
