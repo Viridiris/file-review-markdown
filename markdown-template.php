@@ -21,4 +21,27 @@ function helper1(){
     echo $table_string;
     echo "<br>";
 
+    // -----------------------------------------------------------------------------------------
+    // INSERT CONSTANTS HERE -----------------------------------------------------------------------------------------
+    // -----------------------------------------------------------------------------------------
+
+    $constant_string = "## Constants<br><br>";
+
+    $constants = "";
+
+    preg_match_all("/[A-Z]+\S*/",$constants,$extracted_constant_names,PREG_PATTERN_ORDER);
+
+    if (empty($constants)) {
+        $constant_string .= "None<br>";
+    } else {
+        $constant_string .= "| Type | Name | Description |<br>";
+        $constant_string .= "| ---- | ---- | ----------- |<br>";
+        foreach ($extracted_constant_names[0] as $var_name) {
+            $constant_string .= "|  | `". $var_name ."` |  |<br>";
+        }
+    }
+
+    echo $constant_string;
+    echo "<br>";
+
 }
