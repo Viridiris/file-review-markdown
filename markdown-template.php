@@ -63,9 +63,31 @@ function helper1(){
         }
     }
 
-
-
     echo $property_string;
     echo "<br>";
+
+    // -----------------------------------------------------------------------------------------
+    // INSERT METHODS HERE -----------------------------------------------------------------------------------------
+    // -----------------------------------------------------------------------------------------
+
+    $method_string = "## Methods<br><br>";
+
+    $lines = file('/vagrant/app/mod/BinController.php', FILE_IGNORE_NEW_LINES);
+
+    $matches_array = [];
+
+    foreach ($lines as $line) {
+        preg_match('/public .*function+.*\)/', $line, $matches);
+        if (!empty($matches)) {
+            $method_string .= "### `". $matches[0] ."`<br><br>";
+            $method_string .= "--------- Description of the method ----------<br><br>";
+            preg_match_all("/\\\$[^,]*(?<!\))(?<!,)/",$matches[0],$extracted_parameter_names,PREG_PATTERN_ORDER);
+            $method_string .= "#### Return Value<br><br>";
+            $method_string .= "--------- Return Value ----------<br><br>";
+        }
+        array_push($matches_array, $matches);
+    }
+
+    echo $method_string;
 
 }
